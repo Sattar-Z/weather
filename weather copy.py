@@ -2,6 +2,52 @@ import requests
 import json
 import tkinter as tk
 
+
+
+bg_color = "#1F1F1F"
+fg_color = "white"
+
+
+root = tk.Tk()
+root.title("Weather App")
+root.configure(bg=bg_color)
+
+
+logo_image = tk.PhotoImage(file="logo.png")
+logo_label = tk.Label(image=logo_image, bg=bg_color)
+logo_label.pack(pady=(20, 0))
+
+
+location_label = tk.Label(
+    text="Location:",
+    font=("Open Sans", 16),
+    bg=bg_color,
+    fg=fg_color
+)
+location_label.pack(pady=(20, 10))
+
+location_entry = tk.Entry(font=("Open Sans", 16))
+location_entry.pack()
+
+
+temperature_label = tk.Label(
+    text="",
+    font=("Open Sans", 64, "bold"),
+    bg=bg_color,
+    fg=fg_color
+)
+temperature_label.pack(pady=(20, 0))
+
+
+weather_label = tk.Label(
+    text="",
+    font=("Open Sans", 24),
+    bg=bg_color,
+    fg=fg_color
+)
+weather_label.pack()
+
+
 def get_weather_data(location):
     api_key = "YOUR_API_KEY"  # replace with your own API key
     url = f"http://api.openweathermap.org/data/2.5/weather?q={location}&units=metric&appid={api_key}"
@@ -27,27 +73,13 @@ def show_weather():
     else:
         weather_label.config(text="Error: Could not retrieve weather data")
 
+get_weather_button = tk.Button(
+    text="Get Weather",
+    font=("Open Sans", 16),
+    bg=fg_color,
+    fg=bg_color,
+    command=show_weather
+)
+get_weather_button.pack(pady=(20, 0))
 
-window = tk.Tk()
-window.title("Weather App")
-
-
-location_label = tk.Label(window, text="Enter location:")
-location_entry = tk.Entry(window, width=30)
-get_weather_button = tk.Button(window, text="Get Weather", command=show_weather)
-weather_label = tk.Label(window, text="")
-temperature_label = tk.Label(window, text="")
-humidity_label = tk.Label(window, text="")
-wind_speed_label = tk.Label(window, text="")
-
-
-location_label.grid(row=0, column=0, padx=10, pady=10)
-location_entry.grid(row=0, column=1, padx=10, pady=10)
-get_weather_button.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
-weather_label.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
-temperature_label.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
-humidity_label.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
-wind_speed_label.grid(row=5, column=0, columnspan=2, padx=10, pady=10)
-
-
-window.mainloop()
+root.mainloop()
