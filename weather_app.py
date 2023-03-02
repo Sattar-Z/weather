@@ -48,7 +48,7 @@ weather_label.pack()
 
 def get_weather():
     location = location_entry.get()
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={location}&appid=<5b395d8f0e559f6a785eac58f1f22348>&units=metric"
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={location}&appid=<YOUR_API_KEY>&units=metric"
     response = requests.get(url)
 
     if response.status_code == 200:
